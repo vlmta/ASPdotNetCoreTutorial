@@ -3,9 +3,14 @@
     -   add razor view "Index.cshtml"
 *@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Welcome";
 }
 
-<h2>Index</h2>
+<h2>Welcome</h2>
 
-<p>Hello from our View Template!</p>
+<ul>
+    @for (int i = 0; i < (int)ViewData["NumTimes"]; i++)
+    {
+        <li>@ViewData["Message"]</li>
+    }
+</ul>
