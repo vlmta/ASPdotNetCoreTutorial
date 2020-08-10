@@ -30,12 +30,13 @@ namespace ASPdotNetCoreTutorial.Controllers
         */
 
         // GET: /HelloWorld/Welcome/
-        public IActionResult Welcome(string name, int numTimes = 1)
+        public string Welcome(string name, int ID = 1)
         {
-            ViewData["Message"] = "Hello " + name;
-            ViewData["NumTimes"] = numTimes;
-
-            return View();
+         /*
+         * /helloworld/welcome/3?name=Tam
+         * id that matched the URL template in the MapControllerRoute method.
+         */
+            return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
         }
     }
 }
