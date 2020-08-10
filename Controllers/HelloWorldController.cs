@@ -14,9 +14,18 @@ namespace ASPdotNetCoreTutorial.Controllers
         format:
             [Controller]/[ActionName]/[Parameters]
          */
-        public IActionResult Index()
+
+
+        // GET: /HelloWorld/
+        public string Index()
         {
-            return View();
+            return "This is my default action method... ";
+        }
+
+        // GET: /HelloWorld/Welcome/ 
+        public string Welcome()
+        {
+            return "This is Welcome action method...";
         }
     }
 }
