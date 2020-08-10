@@ -23,17 +23,20 @@ namespace ASPdotNetCoreTutorial.Controllers
             return "This is my default action method... ";
         }
 
-
         /*
-         *numTimes parameter defaults to 1 if no value is passed for that parameter.
-         *Uses HtmlEncoder.Default.Encode to protect the app from malicious input (namely JavaScript).
-         *Uses Interpolated Strings in $"Hello {name}, NumTimes is: {numTimes}".   
-         */
+        *numTimes parameter defaults to 1 if no value is passed for that parameter.
+        *Uses HtmlEncoder.Default.Encode to protect the app from malicious input (namely JavaScript).
+        *Uses Interpolated Strings in $"Hello {name}, NumTimes is: {numTimes}".   
+        */
 
-        // GET: /HelloWorld/Welcome/ 
-        public string Welcome(string name, int numTimes = 1)
+        // GET: /HelloWorld/Welcome/
+        public string Welcome(string name, int ID = 1)
         {
-            return HtmlEncoder.Default.Encode($"Hello {name}, NumTimes is: {numTimes}");
+         /*
+         * /helloworld/welcome/3?name=Tam
+         * id that matched the URL template in the MapControllerRoute method.
+         */
+            return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
         }
     }
 }
