@@ -20,40 +20,33 @@ namespace ASPdotNetCoreTutorial.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            var movies =from m 
-                       in  _context.Movie 
-                       select m;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.Title.Contains(searchString));
-            }
-            return View(await movies.ToListAsync());
-        }
+            // Use LINQ to get list of genres.
+            IQueryable<string> genreQuery = from m in _context.Movie
+                                            orderby m.Genre
+                                            select m.Genre;
 
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
-        }
+            var movies = from m in _context.Movie
+                         select m;
 
-        // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            if (!string.IsNullOrEmpty(searchString))
             {
-                return NotFound();
+                movies = movies.Where(s => s.Title.ToLower().Contains(searchString.ToLower()));
             }
 
-            var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (!string.IsNullOrEmpty(movieGenre))
             {
-                return NotFound();
+                movies = movies.Where(x => x.Genre == movieGenre);
             }
 
-            return View(movie);
+            var movieGenreVM = new MovieGenreViewModel
+            {
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Movies = await movies.ToListAsync()
+            };
+
+            return View(movieGenreVM);
         }
 
         // GET: Movies/Create
