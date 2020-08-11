@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ASPdotNetCoreTutorial.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20200810090153_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200811091010_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,10 @@ namespace ASPdotNetCoreTutorial.Migrations
                         .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Rating")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("timestamp without time zone");
