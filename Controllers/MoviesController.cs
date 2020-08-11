@@ -29,7 +29,7 @@ namespace ASPdotNetCoreTutorial.Controllers
             {
                 movies = movies.Where(s => s.Title.Contains(searchString));
             }
-            return View(await _context.Movie.ToListAsync());
+            return View(await movies.ToListAsync());
         }
 
         [HttpPost]
